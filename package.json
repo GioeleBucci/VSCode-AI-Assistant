@@ -1,0 +1,161 @@
+{
+    "name": "ai-assistant",
+    "displayName": "AI Assistant",
+    "description": "A customizable AI assistant providing chat, inline code completions and in-place code editing capabilities.",
+    "version": "1.0.0",
+    "publisher": "GioeleBucci",
+    "private": true,
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "ai-chat",
+                    "title": "AI Assistant",
+                    "icon": "media/icons/chatIcon.svg"
+                }
+            ]
+        },
+        "views": {
+            "ai-chat": [
+                {
+                    "type": "webview",
+                    "id": "ai-assistant.chatWebview",
+                    "name": "Chat",
+                    "icon": "media/icons/chatIcon.svg"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "ai-assistant.refactor",
+                "title": "AI Assistant: Refactor"
+            },
+            {
+                "command": "ai-assistant.edit",
+                "title": "AI Assistant: Edit"
+            },
+            {
+                "command": "ai-assistant.docs",
+                "title": "AI Assistant: Generate Docs"
+            },
+            {
+                "command": "ai-assistant.newChat",
+                "title": "AI Assistant: New Chat",
+                "icon": "$(keybindings-add)"
+            }
+        ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "ai-assistant.newChat",
+                    "when": "view == ai-assistant.chatWebview",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "ai-assistant.edit",
+                "key": "ctrl+shift+e",
+                "mac": "cmd+shift+e",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "command": "ai-assistant.refactor",
+                "key": "ctrl+shift+e",
+                "mac": "cmd+shift+e",
+                "when": "editorTextFocus && !editorReadonly"
+            }
+        ],
+        "configuration": {
+            "title": "AI Assistant",
+            "properties": {
+                "ai-assistant.provider": {
+                    "type": "string",
+                    "enum": [
+                        "google"
+                    ],
+                    "default": "google",
+                    "description": "AI service provider to use."
+                },
+                "ai-assistant.apiKey": {
+                    "type": "string",
+                    "description": "API Key for the AI service"
+                },
+                "ai-assistant.baseModel": {
+                    "type": "string",
+                    "description": "Model to use for the AI services."
+                },
+                "ai-assistant.chatModel": {
+                    "type": "string",
+                    "description": "Model to use for the chat. If not set, ai-assistant.baseModel will be used. Using a more powerful model for chat interactions is recommended."
+                },
+                "ai-assistant.temperature": {
+                    "type": "number",
+                    "description": "Controls the randomness of the generated text. Lower values make the model more deterministic, while higher values make it more randomic."
+                },
+                "ai-assistant.maxOutputTokens": {
+                    "type": "number",
+                    "description": "Maximum token length of the generated text. A token is equivalent to about 4 characters and 100 tokens is equal to about 60-80 English words."
+                },
+                "ai-assistant.topK": {
+                    "type": "number",
+                    "description": "Restricts choices to the k most likely tokens.\nTokens are further filtered based on topP with the final token selected using temperature sampling."
+                },
+                "ai-assistant.topP": {
+                    "type": "number",
+                    "description": "Tokens are selected from the most to least probable until the sum of their probabilities equals the topP value."
+                },
+                "ai-assistant.enableInlineCompletions": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable inline completions"
+                },
+                "ai-assistant.inlineCompletions.timeBetweenRequests": {
+                    "type": "integer",
+                    "default": 2000,
+                    "description": "Time (in milliseconds) between inline completion requests."
+                },
+                "ai-assistant.inlineCompletions.idleDelay": {
+                    "type": "integer",
+                    "default": 600,
+                    "description": "Delay (in milliseconds) after the user stops typing before an inline completion request is sent."
+                },
+                "ai-assistant.inlineCompletions.model": {
+                    "type": "string",
+                    "description": "Model to use for inline completions. If not set, ai-assistant.baseModel will be used. Using a faster and cheaper model for inline completions is recommended."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "eslint",
+        "watch": "tsc -watch -p ./",
+        "download-api": "dts dev",
+        "postinstall": "npm run download-api"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.13.0",
+        "@google/genai": "^0.7.0",
+        "@stylistic/eslint-plugin": "^2.9.0",
+        "@types/node": "^20",
+        "@types/vscode": "^1.74.0",
+        "@vscode/dts": "^0.4.0",
+        "eslint": "^9.13.0",
+        "typescript": "^5.8.2",
+        "typescript-eslint": "^8.26.0"
+    }
+}

@@ -1,0 +1,491 @@
+/* Minimal override to VS Code theme defaults */
+*:focus {
+    outline-color: var(--vscode-focusBorder) !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-foreground);
+    font-size: var(--vscode-font-size);
+    font-weight: var(--vscode-font-weight);
+    font-family: var(--vscode-font-family);
+}
+
+/* Fontello icon styles */
+i[class^="icon-"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--vscode-panel-background);
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+.message-user {
+    max-width: 80%;
+    align-self: flex-end;
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+}
+
+.message-assistant {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-input-border);
+    color: var(--vscode-foreground);
+}
+
+.error-text {
+    color: var(--vscode-errorForeground, #f48771);
+    font-weight: 500;
+}
+
+/* Markdown styling within assistant messages */
+.message-assistant h1,
+.message-assistant h2,
+.message-assistant h3 {
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.message-assistant h1 {
+    font-size: 1.5em;
+}
+
+.message-assistant h2 {
+    font-size: 1.3em;
+}
+
+.message-assistant h3 {
+    font-size: 1.2em;
+}
+
+.message-assistant ul,
+.message-assistant ol {
+    padding-left: 1.5em;
+    margin: 0.5em 0;
+}
+
+.message-assistant p {
+    margin: 0.5em 0;
+}
+
+.message-assistant a {
+    color: var(--vscode-textLink-foreground);
+    text-decoration: none;
+}
+
+.message-assistant a:hover {
+    text-decoration: underline;
+}
+
+.message-assistant code {
+    background-color: var(--vscode-textCodeBlock-background);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.code-block-wrapper {
+    position: relative;
+    margin: 0.5em 0;
+}
+
+.language-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.8em;
+    background-color: var(--vscode-badge-background);
+    color: var(--vscode-badge-foreground);
+    padding: 2px 6px;
+    border-radius: 3px 0 3px 0;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.message-assistant pre {
+    background-color: var(--vscode-textCodeBlock-background);
+    border-radius: 6px;
+    padding: 1.5em 0.5em 0.5em;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.message-assistant pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.9em;
+    color: var(--vscode-textPreformat-foreground);
+}
+
+.copy-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    border: none;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-block-wrapper:hover .copy-button {
+    opacity: 1;
+}
+
+.copy-button:hover {
+    background-color: var(--vscode-button-secondaryHoverBackground);
+}
+
+.message-assistant table {
+    border-collapse: collapse;
+    margin: 0.5em 0;
+    width: 100%;
+}
+
+.message-assistant th,
+.message-assistant td {
+    border: 1px solid var(--vscode-panel-border);
+    padding: 6px 8px;
+    text-align: left;
+}
+
+.message-assistant th {
+    background-color: var(--vscode-panel-background);
+    font-weight: bold;
+}
+
+.message-assistant blockquote {
+    border-left: 3px solid var(--vscode-activityBar-background);
+    color: var(--vscode-disabledForeground);
+    padding-left: 10px;
+    margin: 0.5em 0 0.5em 5px;
+}
+
+.message.loading {
+    position: relative;
+}
+
+.message.loading::after {
+    content: "...";
+    animation: loading 1.5s infinite;
+    opacity: 0.7;
+}
+
+@keyframes loading {
+    0% {
+        content: ".";
+    }
+
+    33% {
+        content: "..";
+    }
+
+    66% {
+        content: "...";
+    }
+
+    100% {
+        content: ".";
+    }
+}
+
+.chat-input-container {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 16px;
+    background-color: var(--vscode-editor-background);
+    position: sticky;
+    bottom: 0;
+}
+
+/* Input wrapper for text input and buttons */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+/* Add focused state for the input wrapper */
+.input-wrapper.focused {
+    border-color: var(--vscode-focusBorder);
+    outline: 1px solid var(--vscode-focusBorder);
+    outline-offset: -1px;
+}
+
+#chat-input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 4px 4px 0 0;
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: none;
+    resize: none;
+    max-height: 70vh;
+    line-height: 1.4;
+    font-family: var(--vscode-font-family);
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+#chat-input:focus {
+    outline: none;
+}
+
+/* Action panel that appears below the input */
+.input-actions-panel {
+    position: relative;
+    width: 100%;
+    height: 36px;
+    background-color: var(--vscode-input-background);
+    border-radius: 0 0 4px 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.input-actions-container {
+    position: relative;
+    display: flex;
+    gap: 5px;
+}
+
+.send-button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    border-radius: 50%;
+    color: var(--vscode-foreground);
+}
+
+.send-button:hover {
+    background-color: var(--vscode-button-secondaryHoverBackground);
+    color: var(--vscode-button-secondaryForeground);
+}
+
+.send-button i {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.action-button {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.action-button:hover {
+    background-color: var(--vscode-button-secondaryHoverBackground);
+}
+
+.action-button.active {
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+}
+
+.action-button.active:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+.active-files-container {
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: var(--vscode-editor-background);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.file-chip {
+    display: flex;
+    align-items: center;
+    background-color: var(--vscode-badge-background);
+    color: var(--vscode-badge-foreground);
+    border-radius: 16px;
+    padding: 2px 8px 2px 12px;
+    font-size: 12px;
+    max-width: 300px;
+    cursor: default;
+    position: relative;
+    height: 24px;
+}
+
+.file-chip .file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 16px;
+    flex: 1;
+    min-width: 0;
+}
+
+.file-chip .remove-file {
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--vscode-badge-foreground);
+    opacity: 0.7;
+    padding: 0;
+    font-size: 12px;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.file-chip .remove-file i {
+    margin: 0 auto;
+}
+
+/* Light background on hover for better UX */
+.file-chip .remove-file:hover {
+    opacity: 1;
+    background-color: rgba(128, 128, 128, 0.3);
+}
+
+.current-file-container {
+    padding: 8px 12px;
+    background-color: var(--vscode-editor-background);
+    border-top: 1px solid var(--vscode-input-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.current-file-container.hidden {
+    display: none;
+}
+
+.current-file {
+    display: flex;
+    align-items: center;
+    background-color: var(--vscode-badge-background);
+    color: var(--vscode-badge-foreground);
+    border-radius: 16px;
+    padding: 2px 8px 2px 12px;
+    font-size: 12px;
+    max-width: 300px;
+    width: auto;
+    cursor: default;
+    position: relative;
+    height: 24px;
+    flex: 0 1 auto;
+}
+
+.current-file .current-file-label {
+    font-size: 12px;
+    color: var(--vscode-descriptionForeground);
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+.current-file .file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 16px;
+    flex: 1;
+    min-width: 0;
+}
+
+.current-file .toggle-file {
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--vscode-badge-foreground);
+    opacity: 0.7;
+    padding: 0;
+    font-size: 12px;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.current-file .toggle-file i {
+    margin: 0 auto;
+}
+
+.current-file .toggle-file:hover {
+    opacity: 1;
+    background-color: rgba(128, 128, 128, 0.3);
+}
