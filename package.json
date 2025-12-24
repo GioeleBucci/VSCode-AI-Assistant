@@ -73,8 +73,8 @@
             },
             {
                 "command": "ai-assistant.refactor",
-                "key": "ctrl+shift+e",
-                "mac": "cmd+shift+e",
+                "key": "ctrl+shift+r",
+                "mac": "cmd+shift+r",
                 "when": "editorTextFocus && !editorReadonly"
             }
         ],
