@@ -1,10 +1,6 @@
 # A prototypal AI assistant for Visual Studio Code
 
 <p align="center">
-  <img src="media/icons/chatIcon.svg" alt="AI Assistant Logo" width="120" height="120">
-</p>
-
-<p align="center">
   <em>A customizable, extensible AI coding assistant for Visual Studio Code, developed as my Bachelor's Degree thesis project</em><br>
 </p>
 
@@ -122,4 +118,7 @@ npm run watch
 npm run lint
 ```
 
-
+## 📸 Screenshots
+<img src="https://imgur.com/zSFyw5T.png" width="500"/>
+<img src="https://imgur.com/AujqTO2.png" width="500"/>
+<img src="https://imgur.com/1j3zROq.png" width="500"/>
